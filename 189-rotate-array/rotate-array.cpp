@@ -2,15 +2,16 @@ class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
         int n = nums.size();
-        k = k % n; // Unnecessary rotations se bachne ke liye
+        k = k % n;
 
-        // Step 1: Poore array ko reverse karo
-        reverse(nums.begin(), nums.end());
-        
-        // Step 2: First k elements ko reverse karo
-        reverse(nums.begin(), nums.begin() + k);
-        
-        // Step 3: Remaining elements ko reverse karo
-        reverse(nums.begin() + k, nums.end());
+        vector<int> temp(n);
+
+        for (int i = 0; i < n; i++) {
+            temp[(i + k) % n] = nums[i];
+        }
+
+        for (int i = 0; i < n; i++) {
+            nums[i] = temp[i];
+        }
     }
 };
